@@ -6,13 +6,15 @@
 </head>
 <body>
 <div id="content-container">
-
-    <div id="content-left">
-        {% block content %} {% endblock content %}
-    </div>
-    <div id="content-right">
-        {% include "navigation.html" %}    
-    {% block right-rail %} {% endblock right-rail %}
+    <div id="header"><img src="/static/img/steve_kait_title.jpg"  /></div>
+    <div id="columns">
+        <div id="content-left">
+            {% block content %} {% endblock content %}
+        </div>
+        <div id="content-right">
+            {% include "navigation.html" %}    
+            {% block right-rail %} {% endblock right-rail %}
+        </div>
     </div>
 
 
