@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kaitlin and Steve are Getting Married!</title>
+<link rel="stylesheet" href="/static/styles/main.css" type="text/css" media=screen />
+</head>
+<body>
+<div id="content-container">
+
+    <div id="content-left">
+        {% block content %} {% endblock content %}
+    </div>
+    <div id="content-right">
+        {% include "navigation.html" %}    
+    {% block right-rail %} {% endblock right-rail %}
+    </div>
+
+
+
+
+</div>
+</body>
+</html>
