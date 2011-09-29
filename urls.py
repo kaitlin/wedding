@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {'template': 'index.html'}),
+    url(r'^songs/$', direct_to_template, {'template': 'songs.html'}),
     # Examples:
     # url(r'^$', 'myproject.views.home', name='home'),
     # url(r'^myproject/', include('myproject.foo.urls')),
