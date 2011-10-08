@@ -1,9 +1,11 @@
 
 body, div, img, h1 { margin: 0; padding: 0; font-family: 'IM Fell DW Pica', serif; }
 body { background-color: #226579; }
-h1 { background: url('/static/img/kaitlin_and_steve_thin.jpg') top left no-repeat; width: 1024px; height: 200px; display:block; padding-left:300px; padding-top: 50px; }
+h1 { background: url('/static/img/kaitlin_and_steve_thin.jpg') top left no-repeat; width: 985px; height: 200px; display:block; border: 8px solid white; border-bottom:none; }
+h1 span { padding-left:325px; padding-top: 50px; display:block; }
 div#content-container { width: 1024px; margin: 0 auto; color: white; font-family: georgia; font-size: 12pt; }
-div#content-container p { margin: 20px; padding: 10px; }
+div#content-container p, h2, h3, iframe { margin: 20px; padding: 10px; }
+
 div#columns { width: 100%; }
 div.blue-border { border: 2px solid #408484; margin: 20px;}
 div#content-left { float:left; width: 674px; background-color:white; font-family:'Prociono', serif; line-height:22px; color: black; }
@@ -15,3 +17,4 @@ ul.nav { list-style-type: none;  }
 ul.nav li { list-style-type:none; font-size: 1.4em; margin: 10px;}
 ul.nav li a {text-decoration: none; color:white; }
 ul.nav li a:hover { text-decoration: underline; }
+
