@@ -3,100 +3,44 @@
 {% block title %}Viewing Event {{ event.title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ event.title }}</h1>
+    <h2>{{ event.title }}</h2>
     
-    <p>Date: {{ event.date_of_event|date:"F j, Y @ f a" }}</p>
-    
-    <p>{{ event.description|linebreaksbr }}</p>
-    
-    <h2>Event Details</h2>
-    
+    <h3 style="margin-bottom: 5px;padding-bottom: 0px;">Event Details</h3>
+    <p style="margin-top: 5px; padding-top:5px;">
+    {{ event.description|linebreaksbr }}
+    <br /><br />
+    <strong>Date:</strong> {{ event.date_of_event|date:"F j, Y @ f a" }}
     {% if event.hosted_by %}
-        <p>
+            <br /><br />
             <strong>Hosted By:</strong>
             {{ event.hosted_by }}
-        </p>
     {% endif %}
     
     {% if event.street_address %}
-        <p>
+            <br /><br />
             <strong>Address:</strong><br>
             {{ event.street_address }}<br>
             {{ event.city }}, {{ event.state }} {{ event.zip_code }}<br>
             {{ event.telephone }}
-        </p>
     {% endif %}
-    
+    </p> 
     <h2>Will You Be Attending?</h2>
     
-    <form method="post" action=".">
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="RSVP">
-                </td>
-            </tr>
-        </table>
+    <form method="post" action=".">{% csrf_token %}
+    <input type="hidden" name="event_id" id="id_event_id" value="{{event.id}}" />
+    {{test}}
+    {% for error in form.subject.errors %}{{error}} {% endfor %}
+            <ul>
+            <li><span class="error">{{form.non_field_errors}}</span></li>
+            <li><label for="name">Name:</label>{{form.name}}<br />
+                <em>{% if form.name.errors %} <span class="error">{{form.name.errors}}</span><br/>{% endif%}Enter the first name on your invitation envelope, exactly as it appears</em>
+            </li>
+            <li><label for="email">Email:</label>{{form.email}}<br />{{form.email.errors}}</li>
+            <li><label for="attending">Attending:</label>{{form.attending}}<br />{{form.attending.errors}}</li>
+            <li><label for="number_of_guests">No. of Guests</label><span class="error">{{form.number_of_guests}}</span><br />{{form.number_of_guests.errors}}</li>
+            <li><label for="comments">Comments:</label><br />{{form.comment}}<br />{{form.comment.errors}}</li>
+            </ul>
+            <input style="margin-left:50px; padding: 7px 15px; cursor:pointer; font-weight: bold; font-size: 16px; font-family:'IM Fell DW Pica', serif; background-color: white; border: 2px solid black;" type="submit" value="R.S.V.P.">
     </form>
     
-    <h2>Guest List</h2>
-    
-    {% if event.guests_attending.count %}
-        <h3>Attending ({{ event.guests_attending.count }} guest{{ event.guests_attending.count|pluralize }})</h3>
-    
-        <ul>
-            {% for guest in event.guests_attending %}
-                <li>
-                    {{ guest.name }}
-                    {% if guest.number_of_guests %}
-                        + {{ guest.number_of_guests }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    
-    {% if event.guests_not_attending.count %}
-        <h3>Not Attending ({{ event.guests_not_attending.count }} guest{{ event.guests_not_attending.count|pluralize }})</h3>
-    
-        <ul>
-            {% for guest in event.guests_not_attending %}
-                {% if guest.name %}
-                    <li>
-                        {{ guest.name }}
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endif %}
-    
-    {% if event.guests_may_attend.count %}
-        <h3>May Attend ({{ event.guests_may_attend.count }} guest{{ event.guests_may_attend.count|pluralize }})</h3>
-    
-        <ul>
-            {% for guest in event.guests_may_attend %}
-                {% if guest.name %}
-                    <li>
-                        {{ guest.name }}
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endif %}
-    
-    {% if event.guests_no_rsvp.count %}
-        <h3>Have Not RSVPed Yet ({{ event.guests_no_rsvp.count }} guest{{ event.guests_no_rsvp.count|pluralize }})</h3>
-    
-        <ul>
-            {% for guest in event.guests_no_rsvp %}
-                {% if guest.name %}
-                    <li>
-                        {{ guest.name }}
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endif %}
 {% endblock %}

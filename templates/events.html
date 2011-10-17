@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Choose an Event to RSVP For:</h2>
+
+<ul>
+{% for e in events %}
+    <li><a href="/rsvp/event/{{e.slug}}/">{{e.title}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

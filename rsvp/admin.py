@@ -5,7 +5,7 @@ from rsvp.models import Event, Guest
 class GuestInline(admin.TabularInline):
     model = Guest
     extra = 3
-    fields = ('email', 'name', 'attending_status', 'number_of_guests')
+    fields = ('email', 'name')
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -22,16 +22,16 @@ class EventAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         })
     )
-    inlines = [GuestInline]
+    #inlines = [GuestInline]
     list_display = ('title', 'date_of_event')
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('title', 'description', 'hosted_by')
 
 
 class GuestAdmin(admin.ModelAdmin):
-    fields = ('event', 'email', 'name', 'attending_status', 'number_of_guests', 'comment')
-    list_display = ('email', 'name', 'attending_status', 'number_of_guests')
-    list_filter = ('attending_status',)
+    fields = ('email', 'name')
+    list_display = ('email', 'name')
+#    list_filter = ('attending_status',)
     search_fields = ('email', 'name')
 
 

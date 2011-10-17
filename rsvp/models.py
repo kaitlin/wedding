@@ -10,10 +10,20 @@ from django.contrib.sites.models import Site
 ATTENDING_CHOICES = (
     ('yes', 'Yes'),
     ('no', 'No'),
-    ('maybe', 'Maybe'),
+#    ('maybe', 'Maybe'),
     ('no_rsvp', 'Hasn\'t RSVPed yet')
 )
-
+class Guest(models.Model):
+#    event = models.ForeignKey(Event, related_name='guests')
+    email = models.EmailField(blank=True)
+    name = models.CharField(max_length=128)
+   
+    def __unicode__(self):
+        return u"%s" % ( self.name)
+    
+    def save(self, *args, **kwargs):
+        self.updated = datetime.datetime.now()
+        super(Guest, self).save(*args, **kwargs)
 
 class Event(models.Model):
     title = models.CharField(max_length=255)
@@ -31,7 +41,7 @@ class Event(models.Model):
     telephone = models.CharField(max_length=20, blank=True, default='')
     created = models.DateTimeField(default=datetime.datetime.now)
     updated = models.DateTimeField(blank=True, null=True)
-    
+   # guests = models.ManyToManyField(Guest)   
     def __unicode__(self):
         return self.title
     
@@ -77,20 +87,12 @@ class Event(models.Model):
         send_mass_mail(mass_mail_data, fail_silently=True)
         return self.guests_no_rsvp().count()
 
-
-class Guest(models.Model):
-    event = models.ForeignKey(Event, related_name='guests')
-    email = models.EmailField()
-    name = models.CharField(max_length=128, blank=True, default='')
+class RSVP(models.Model):
+    guest = models.ForeignKey(Guest)
+    event = models.ForeignKey(Event)
     attending_status = models.CharField(max_length=32, choices=ATTENDING_CHOICES, default='no_rsvp')
-    number_of_guests = models.SmallIntegerField(default=0)
+    number_of_guests = models.SmallIntegerField(default=0, blank=True)
     comment = models.CharField(max_length=255, blank=True, default='')
     created = models.DateTimeField(default=datetime.datetime.now)
     updated = models.DateTimeField(blank=True, null=True)
-    
-    def __unicode__(self):
-        return u"%s - %s - %s" % (self.event.title, self.email, self.attending_status)
-    
-    def save(self, *args, **kwargs):
-        self.updated = datetime.datetime.now()
-        super(Guest, self).save(*args, **kwargs)
+ 

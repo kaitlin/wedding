@@ -5,9 +5,9 @@
 {% block content %}
     <h1>Thanks For RSVPing To {{ event.title }}</h1>
     
+    <p> You've successfully RSVP'ed. See you there!</p>
     <p>
-        You've been placed on the 
-        <a href="{% url rsvp_event_view event.slug %}">"{{ guest.get_attending_status_display }}" 
-        list</a>.
+
+        <a href="/rsvp/">&raquo;Back to Events</a>
     </p>
 {% endblock %}

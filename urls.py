@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^$', direct_to_template, {'template': 'index.html'}),
     url(r'^about/$', direct_to_template, {'template': 'about_vieques.html'}),
     url(r'^songs/$', direct_to_template, {'template': 'songs.html'}),
+    url(r'^photos/$', direct_to_template, {'template': 'photos.html'}),
+    url(r'^rsvp/', include('rsvp.urls')),
     # Examples:
     # url(r'^$', 'myproject.views.home', name='home'),
     # url(r'^myproject/', include('myproject.foo.urls')),
