@@ -28,16 +28,15 @@
     
     <form method="post" action=".">{% csrf_token %}
     <input type="hidden" name="event_id" id="id_event_id" value="{{event.id}}" />
-    {{test}}
     {% for error in form.subject.errors %}{{error}} {% endfor %}
             <ul>
             <li><span class="error">{{form.non_field_errors}}</span></li>
-            <li><label for="name">Name:</label>{{form.name}}<br />
-                <em>{% if form.name.errors %} <span class="error">{{form.name.errors}}</span><br/>{% endif%}Enter the first name on your invitation envelope, exactly as it appears</em>
+            <li class="form-name"><label for="name">Name(s):</label><br />{{form.name}}<br />
+                <em>{% if form.name.errors %} <span class="error">{{form.name.errors}}</span><br/>{% endif%}Enter the name(s) on your invitation envelope, exactly as it appears</em><br />
             </li>
-            <li><label for="email">Email:</label>{{form.email}}<br />{{form.email.errors}}</li>
-            <li><label for="attending">Attending:</label>{{form.attending}}<br />{{form.attending.errors}}</li>
-            <li><label for="number_of_guests">No. of Guests</label><span class="error">{{form.number_of_guests}}</span><br />{{form.number_of_guests.errors}}</li>
+        <li><label for="email">Email:</label><br />{{form.email}}<br />{{form.email.errors}}</li>
+            <li><label for="attending">Attending:</label><span id="attending">{{form.attending}}</span><br />{{form.attending.errors}}</li>
+<!--            <li><label for="number_of_guests">No. of Guests</label><span class="error">{{form.number_of_guests}}</span><br />{{form.number_of_guests.errors}}</li>-->
             <li><label for="comments">Comments:</label><br />{{form.comment}}<br />{{form.comment.errors}}</li>
             </ul>
             <input style="margin-left:50px; padding: 7px 15px; cursor:pointer; font-weight: bold; font-size: 16px; font-family:'IM Fell DW Pica', serif; background-color: white; border: 2px solid black;" type="submit" value="R.S.V.P.">

@@ -91,8 +91,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
+INTERNAL_IPS = ('127.0.0.1', '208.58.6.57')
 ROOT_URLCONF = 'wedding.urls'
 
 TEMPLATE_DIRS = (
@@ -113,6 +115,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'debug_toolbar',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -138,6 +141,7 @@ LOGGING = {
     }
 }
 
+DEBUG_TOOLBAR_CONFIG = { 'INTERCEPT_REDIRECTS': False } 
 try:
     from local_settings import *
 except:

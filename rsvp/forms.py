@@ -10,7 +10,7 @@ class RSVPForm(forms.Form):
     email = forms.EmailField()
     name = forms.CharField(max_length=128)
     attending = forms.ChoiceField(choices=VISIBLE_ATTENDING_CHOICES, initial='yes', widget=forms.RadioSelect)
-    number_of_guests = forms.IntegerField(initial=0)
+    #number_of_guests = forms.IntegerField(initial=0)
     comment = forms.CharField(max_length=255, required=False, widget=forms.Textarea)
     event_id = forms.IntegerField()
 
@@ -36,8 +36,7 @@ class RSVPForm(forms.Form):
         cleaned_data = self.cleaned_data
         name = cleaned_data.get('name')
         event_id = cleaned_data.get('event_id')
-
-        guest = Guest.objects.filter(name__contains=name.strip())
+        guest = Guest.objects.filter(name__icontains=name.strip().replace('\r', ' ').replace('\n', ' '))
         event = Event.objects.filter(id=event_id)
         if len(guest) > 0 and len(event) > 0:
             guest = guest[0]

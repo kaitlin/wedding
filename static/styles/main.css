@@ -18,6 +18,9 @@ ul.nav li { list-style-type:none; font-size: 1.4em; margin: 10px;}
 ul.nav li a {text-decoration: none; color:white; }
 ul.nav li a:hover { text-decoration: underline; }
 form ul {list-style-type:none;}
-form ul li {list-style-type:none;}
+div#content-left form ul li {list-style-type:none; margin-bottom:30px; }
+div#content-left form span#attending li  {margin-bottom: 0; }
 form input { padding: 5px; margin: 10px; }
-span.error { color: red; font-weight:bold; }
+.errorlist, span.error { color: red; font-weight:bold; }
+.form-name input, input#id_email { width: 300px; }
+
