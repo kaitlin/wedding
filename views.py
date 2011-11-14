@@ -26,11 +26,18 @@ def add_song(request):
     for s in songs:
         song_list.append(s['SongID'])
 
-    song_list.append(int(request.GET['SongID']))
 
-    update = gs.api_call('setPlaylistSongs', {'playlistID': PLAYLIST_ID, 'songIDs': song_list })
+    song_to_add = int(request.GET['SongID'])
+    if song_to_add not in song_list:
+        song_list.append(song_to_add)
+        
+        
+        update = gs.api_call('setPlaylistSongs', {'playlistID': PLAYLIST_ID, 'songIDs': song_list })
 
-    if update['result']['success'] == 1:
-        return render_to_response('songs.html', {'add_success': 1})
+        if update['result']['success'] == 1:
+            return render_to_response('songs.html', {'add_success': 1})
+        else:
+            return render_to_response('songs.html', {'add_success': 0})
+
     else:
-        return render_to_response('songs.html', {'add_success': 0})
+        return render_to_response('songs.html', {'add_success': 2})

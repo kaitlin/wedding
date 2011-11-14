@@ -19,6 +19,7 @@
 {% ifequal add_success 1 %} <span style="color:red;">Song Added!</span>
 {% endifequal %}
 {% ifequal add_success 0 %} <span style="color:red;">Something went wrong! Your song was NOT added. Try again!</span> {% endifequal %} 
+{% ifequal add_success 2 %} <span style="color:red;">Song was already in playlist!</span> {% endifequal %}
 </div>
 </div>
 </div>
@@ -33,21 +34,16 @@
 function results (d) {
     d = $.parseJSON(d);
     var markup = '<span>click to add a song to the playlist</span><ul>';
-    console.log(typeof(d));
     for(i=0;i< 25;i = i+1){
         markup += '<li><a href="/songs/add?SongID=' + d[i]['SongID'] + '"><em>'+ d[i]['SongName'] + '</em> by ' + d[i]['ArtistName'] + '</a></li>'
     }
     markup += '</ul>';
     $("#list").html(markup)
-    console.log('in results');
-    console.log(d)
-    console.log(markup);
     }
 $("#song-search").submit(function(){
-    console.log($(this).find('input').attr('value'));
+    $("#list").html('<img src="/static/img/ajax-loader.gif" style="margin:10x;" />');
     //var url = 'http://tinysong.com/s/' + $(this).find('input').attr('value') + '?format=JSON&key=' + key;
     var url = '/songs/search/'
-    console.log(url);
     var resp = $.ajax({'url': url, 'data': {'search_type': $(this).find('select').attr('value'), 'search_string': $(this).find('input').attr('value')}, 'success': results });
 
     return false;
