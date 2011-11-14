@@ -96,7 +96,7 @@ MIDDLEWARE_CLASSES = (
 
 INTERNAL_IPS = ('127.0.0.1', '208.58.6.57')
 ROOT_URLCONF = 'wedding.urls'
-
+INTERNAL_IPS = ('127.0.0.1', )
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
