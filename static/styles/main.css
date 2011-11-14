@@ -7,7 +7,7 @@ div#content-container { width: 1024px; margin: 0 auto; color: white; font-family
 div#content-container p, h2, h3, iframe { margin: 20px; padding: 10px; }
 
 div#columns { width: 100%; }
-div.blue-border { border: 2px solid #408484; margin: 20px;padding: 20px 10px;}
+div.blue-border { border: 2px solid #408484; margin: 20px;padding: 20px 10px; float:left; }
 div#content-left { float:left; width: 674px; background-color:white; font-family:'Prociono', serif; line-height:22px; color: black; }
 div#content-right { float:left; width: 319px;  vertical-align:top;  background-color: #EFB98B; border: 8px white solid; margin-left: -8px; }
 div#content-left ul li { margin: 10px; }
@@ -21,3 +21,6 @@ form ul {list-style-type:none;}
 form ul li {list-style-type:none;}
 form input { padding: 5px; margin: 10px; }
 span.error { color: red; font-weight:bold; }
+div.song-container { display:block;}
+div.song-left { float:left; width:275px;}
+div.song-right { float: left; width: 300px; margin-left:20px;}
