@@ -18,7 +18,7 @@ def user_token(username, password):
     token = hashlib.md5(username.lower() + hashlib.md5(password).hexdigest())
     return token.hexdigest()
 
-def api_call(method, parameters={}):
+def api_call(method, parameters={}, client_ip=None):
     
     data = {}
     data['method'] = method
@@ -30,8 +30,9 @@ def api_call(method, parameters={}):
     data_str = simplejson.dumps(data)
     sig = signature(data_str)
     req = urllib2.Request(API_URL+sig, data_str)
+    if client_ip:
+        req.add_header("X-Client-IP", client_ip)
     response = urllib2.urlopen(req).read()
-    
     return simplejson.loads(response)
     
         

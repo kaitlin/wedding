@@ -6,15 +6,18 @@ import simplejson
 from local_settings import GS_USER, GS_PASS, PLAYLIST_ID
 
 def song_search(request):
-    
+    try:
+        client_ip = request.META['HTTP_X_FORWARDED_FOR']
+    except:
+        client_ip = request.META['REMOTE_ADDR']
     gs.init()
     search_type = request.GET['search_type']
     search_string = request.GET['search_string']
 
-    results = gs.api_call('get'+search_type+'SearchResults', {'query': search_string, 'country':'USA'})
+    results = gs.api_call('get'+search_type+'SearchResults', {'query': search_string, 'country':'USA'}, client_ip)
     r = simplejson.dumps(results['result']['songs'])
 
-    return HttpResponse(r)
+    return HttpResponse(client_ip + r)
 
 
 def add_song(request):
